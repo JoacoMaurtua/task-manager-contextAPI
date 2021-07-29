@@ -1,14 +1,19 @@
-import React, {createContext,useState} from 'react';
+import React, {createContext,useState,useEffect} from 'react';
 import uuid from 'uuid';
 export const MyListContext = createContext(); //Objeto usado para compartir informacion
 
 export default function TaskListContext(props) {
 
-  const [tasks, setTasks] = useState([
-    {title:'Wash the car',id:1},
-    {title:'Write some code',id:2},
-    {title:'Read a book',id:3}
-  ]);
+  /* LOCAL STORAGE*/
+  const initialState = JSON.parse(localStorage.getItem('tasks'))||[];
+
+  const [tasks, setTasks] = useState(initialState);
+    
+  useEffect(()=>{
+    localStorage.setItem('tasks',JSON.stringify(tasks))
+  },[tasks]);
+
+  /****/
 
   const [editItem, setEditItem] = useState(null);
 
@@ -34,8 +39,8 @@ export default function TaskListContext(props) {
 
   const editTask = (title,id) =>{
     const newTasks = tasks.map(task =>(task.id === id ? {title,id} : task));
-
     setTasks(newTasks);
+    setEditItem(null);
   };
 
   return (

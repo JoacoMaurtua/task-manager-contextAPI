@@ -14,7 +14,7 @@ export default function TaskForm() {
 
   const HandleSubmit = (event) =>{
     event.preventDefault();
-    if(editItem === null){
+    if(!editItem){
       addTask(title);
       setTitle('');
     }else{
@@ -24,7 +24,7 @@ export default function TaskForm() {
   }
 
   useEffect(()=>{
-    if(editItem !== null){
+    if(editItem){
       setTitle(editItem.title);
       console.log(editItem)
     }else{
@@ -45,7 +45,7 @@ export default function TaskForm() {
        />
 
        <div className="buttons">
-         <button type="submit" className="btn add-task-btn">Add task</button>
+         <button type="submit" className="btn add-task-btn">{editItem?'Edit task':'Add task'}</button>
 
          <button onClick = {clearTasks} className="btn clear-task-btn">Clear</button>
        </div>
