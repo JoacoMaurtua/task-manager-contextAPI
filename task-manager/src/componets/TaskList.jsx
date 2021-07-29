@@ -9,8 +9,8 @@ export default function TaskList() {
   return (
     <ul className="list">
       {
-        tasks.map((task,index)=>{
-          return <Task key={index}/>
+        tasks.map((task)=>{
+          return <Task/>
         })
       }
     </ul>
