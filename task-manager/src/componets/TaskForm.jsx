@@ -7,14 +7,15 @@ export default function TaskForm() {
 
   const [title,setTitle] = useState('');
 
-  const HandleSubmit = (event) =>{
-    event.preventDefault();
-    addTask(title);
-  }
-
   const HandleChange = (event) =>{
     const {value} = event.target
     setTitle(value);
+  }
+
+  const HandleSubmit = (event) =>{
+    event.preventDefault();
+    addTask(title);
+    setTitle('');
   }
 
   return (

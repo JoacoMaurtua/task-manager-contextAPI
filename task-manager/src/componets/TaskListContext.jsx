@@ -17,8 +17,12 @@ export default function TaskListContext(props) {
     ])
   }
 
+  const deleteTask = (id) =>{
+    setTasks(tasks.filter(task => task.id !== id))
+  }
+
   return (
-    <MyListContext.Provider value={{tasks,addTask}}>
+    <MyListContext.Provider value={{tasks,addTask,deleteTask}}>
         {props.children}
     </MyListContext.Provider>
   )
