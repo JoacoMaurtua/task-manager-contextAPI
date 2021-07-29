@@ -7,12 +7,20 @@ export default function TaskList() {
   const {tasks} = useContext(MyListContext); //accedo al contexto
 
   return (
-    <ul className="list">
-      {
-        tasks.map((task)=>{
-          return <Task key={task.id} task={task}/>
-        })
-      }
-    </ul>
+    <div>
+      {tasks.length?(
+         <ul className="list">
+         {
+           tasks.map((task)=>{
+             return <Task key={task.id} task={task}/>
+           })
+         }
+       </ul>
+      ):(
+        <div className="no-tasks">No Tasks</div>
+      )}
+     
+    </div>
+   
   )
 }

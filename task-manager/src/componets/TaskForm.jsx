@@ -1,9 +1,9 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { MyListContext } from './TaskListContext';
 
 export default function TaskForm() {
 
-  const {addTask} = useContext(MyListContext);
+  const {addTask, clearTasks,editItem,editTask} = useContext(MyListContext);
 
   const [title,setTitle] = useState('');
 
@@ -14,9 +14,24 @@ export default function TaskForm() {
 
   const HandleSubmit = (event) =>{
     event.preventDefault();
-    addTask(title);
-    setTitle('');
+    if(editItem === null){
+      addTask(title);
+      setTitle('');
+    }else{
+      editTask(title,editItem.id);
+    }
+    
   }
+
+  useEffect(()=>{
+    if(editItem !== null){
+      setTitle(editItem.title);
+      console.log(editItem)
+    }else{
+      setTitle("");
+    }
+
+  },[editItem]);
 
   return (
     <form onSubmit={HandleSubmit} className="form">
@@ -32,7 +47,7 @@ export default function TaskForm() {
        <div className="buttons">
          <button type="submit" className="btn add-task-btn">Add task</button>
 
-         <button className="btn clear-task-btn">Clear task</button>
+         <button onClick = {clearTasks} className="btn clear-task-btn">Clear</button>
        </div>
     
     </form>

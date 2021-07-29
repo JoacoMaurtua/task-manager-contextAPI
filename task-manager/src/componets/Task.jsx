@@ -3,7 +3,7 @@ import { MyListContext } from './TaskListContext';
 
 export default function Task({task}) {
 
-  const {deleteTask} = useContext(MyListContext);
+  const {deleteTask, findItem} = useContext(MyListContext);
 
   return (
     <li className="list-item">
@@ -13,7 +13,7 @@ export default function Task({task}) {
           <i className="fas fa-trash-alt"></i>
         </button>
 
-        <button className="btn-edit task-btn">
+        <button onClick={()=>findItem(task.id)} className="btn-edit task-btn">
           <i className="fas fa-pen"></i>
         </button>
 
