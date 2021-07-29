@@ -10,7 +10,7 @@ export default function TaskList() {
     <ul className="list">
       {
         tasks.map((task)=>{
-          return <Task/>
+          return <Task key={task.id} task={task}/>
         })
       }
     </ul>
