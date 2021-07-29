@@ -1,5 +1,5 @@
 import React, {createContext,useState} from 'react';
-
+import uuid from 'uuid';
 export const MyListContext = createContext(); //Objeto usado para compartir informacion
 
 export default function TaskListContext(props) {
@@ -10,8 +10,15 @@ export default function TaskListContext(props) {
     {title:'Read a book',id:3}
   ]);
 
+  const addTask = (title) =>{
+    setTasks([
+      ...tasks,
+      {title,id:uuid()} //agrego las anteriores tareas y la actual que creo
+    ])
+  }
+
   return (
-    <MyListContext.Provider value={{tasks,setTasks}}>
+    <MyListContext.Provider value={{tasks,addTask}}>
         {props.children}
     </MyListContext.Provider>
   )
